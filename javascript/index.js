@@ -2,7 +2,7 @@ function changeBackground() {
   var citySelector = document.getElementById("citySelector");
   var selectedCity = citySelector.options[citySelector.selectedIndex].value;
   document.body.style.backgroundImage = selectedCity
-    ? "url('css/" + selectedCity + "')"
+    ? "url('css/" + selectedCity.replace("/", "_").toLowerCase() + ".jpg')"
     : "none";
 
   updateCity();
