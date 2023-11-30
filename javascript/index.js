@@ -28,7 +28,7 @@ function updateCity() {
     cityTimeZone = moment.tz.guess();
   }
 
-  let cityName = cityTimeZone.replace("_", " ").split("/")[1];
+  let cityName = cityTimeZone.replace("_", " ").split("/")[1].toLowerCase();
   let cityTime = moment().tz(cityTimeZone);
   let citiesElement = document.querySelector("#cities");
 
@@ -52,9 +52,14 @@ function updateCity() {
     ? "url('css/" + cityName.toLowerCase() + ".jpg')"
     : "none";
 }
-updateTime();
-setInterval(updateTime, 1000);
 
 let citiesSelectElement = document.querySelector("#citySelector");
 citiesSelectElement.addEventListener("change", changeBackground);
 citiesSelectElement.addEventListener("change", updateCity);
+
+document.addEventListener("DOMContentLoaded", function () {
+  updateCity();
+  setInterval(updateCity, 1000);
+});
+updateTime();
+setInterval(updateTime, 1000);
