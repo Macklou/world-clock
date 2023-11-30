@@ -34,28 +34,28 @@ function updateCity() {
     cityTimeZone = moment.tz.guess();
   }
 
-  let cityName = cityTimeZone.replace("_", " ").split("/")[1].toLowerCase();
+  let cityName = cityTimeZone.replace("_", " ").split("/")[1];
   let cityTime = moment().tz(cityTimeZone);
   let citiesElement = document.querySelector("#cities");
 
   let cityInfoDiv = document.createElement("div");
   cityInfoDiv.classList.add("city");
-  cityInfoDiv.id = cityName;
+  cityInfoDiv.id = cityName.replace(" ", ""); // Remove spaces for the ID
   cityInfoDiv.innerHTML = `
-      <div>
-          <h2>${cityName}</h2>
-          <div class="date">${cityTime.format("MMMM Do YYYY")}</div>
-      </div>
-      <div class="time">${cityTime.format("h:mm:ss")} <small>${cityTime.format(
+    <div>
+        <h2>${cityName}</h2>
+        <div class="date">${cityTime.format("MMMM Do YYYY")}</div>
+    </div>
+    <div class="time">${cityTime.format("h:mm:ss")} <small>${cityTime.format(
     "A"
   )}</small></div>
-    `;
+  `;
 
   citiesElement.innerHTML = "";
   citiesElement.appendChild(cityInfoDiv);
 
   document.body.style.backgroundImage = cityTimeZone
-    ? "url('css/" + cityName.toLowerCase() + ".jpg')"
+    ? `url('css/${cityName.replace(" ", "").toLowerCase()}.jpg')`
     : "none";
 }
 
