@@ -13,6 +13,12 @@ function updateTime(cityId, timeZone) {
   if (cityElement) {
     let dateElement = cityElement.querySelector(".date");
     let timeElement = cityElement.querySelector(".time");
+
+    if (timeZone === "current") {
+      // For "Local Time" option, use the local time
+      timeZone = moment.tz.guess();
+    }
+
     let cityTime = moment().tz(timeZone);
 
     dateElement.innerHTML = cityTime.format("MMMM Do YYYY");
@@ -36,14 +42,14 @@ function updateCity() {
   cityInfoDiv.classList.add("city");
   cityInfoDiv.id = cityName;
   cityInfoDiv.innerHTML = `
-    <div>
-        <h2>${cityName}</h2>
-        <div class="date">${cityTime.format("MMMM Do YYYY")}</div>
-    </div>
-    <div class="time">${cityTime.format("h:mm:ss")} <small>${cityTime.format(
+      <div>
+          <h2>${cityName}</h2>
+          <div class="date">${cityTime.format("MMMM Do YYYY")}</div>
+      </div>
+      <div class="time">${cityTime.format("h:mm:ss")} <small>${cityTime.format(
     "A"
   )}</small></div>
-  `;
+    `;
 
   citiesElement.innerHTML = "";
   citiesElement.appendChild(cityInfoDiv);
@@ -60,6 +66,7 @@ citiesSelectElement.addEventListener("change", updateCity);
 document.addEventListener("DOMContentLoaded", function () {
   updateCity();
   setInterval(updateCity, 1000);
+
+  updateTime(); // Call updateTime once initially
+  setInterval(updateTime, 1000);
 });
-updateTime();
-setInterval(updateTime, 1000);
