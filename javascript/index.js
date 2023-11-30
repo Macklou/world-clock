@@ -9,7 +9,7 @@ function changeBackground() {
 }
 
 function updateTime() {
-  let londonElement = document.querySelector("#london");
+  let londonElement = document.querySelector("#London"); // Update ID to match exactly
 
   if (londonElement) {
     let londonDateElement = londonElement.querySelector(".date");
@@ -33,7 +33,7 @@ function updateCity(event) {
   let citiesElement = document.querySelector("#cities");
 
   citiesElement.innerHTML = `
-    <div class="city" id="${cityName.toLowerCase()}">
+    <div class="city" id="${cityName}">
       <div>
         <h2>${cityName}</h2>
         <div class="date">${cityTime.format("MMMM Do YYYY")}</div>
