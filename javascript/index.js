@@ -9,8 +9,7 @@ function changeBackground() {
 }
 
 function updateTime() {
-  let londonElement = document.querySelector("#London"); // Update ID to match exactly
-
+  let londonElement = document.querySelector("#london");
   if (londonElement) {
     let londonDateElement = londonElement.querySelector(".date");
     let londonTimeElement = londonElement.querySelector(".time");
