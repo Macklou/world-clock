@@ -10,12 +10,14 @@
     <div class="container">
       <h1>World Clock</h1>
 
-      <select>
-        <option value="">Select a city..</option>
-        <option value="">London</option>
-        <option value="">Auckland</option>
-        <option value="">Amman</option>
-        <option value="">San Francisco</option>
+      <select id="citySelector" onchange="changeBackground()">
+        <option value="" data-image="">Select a city..</option>
+        <option value="London" data-image="css/london.jpg">London</option>
+        <option value="Auckland" data-image="css/auckland.jpg">Auckland</option>
+        <option value="Amman" data-image="css/amman.jpg">Amman</option>
+        <option value="San Francisco" data-image="css/sanfrancisco.jpg">
+          San Francisco
+        </option>
       </select>
 
       <div class="city">
@@ -38,15 +40,6 @@
         <div class="date">August 15th 2022</div>
         <div class="time">1:48:15 AM</div>
       </div>
-      <select id="citySelector" onchange="changeBackground()">
-        <option value="" data-image="">Select a city..</option>
-        <option value="London" data-image="css/london.jpg">London</option>
-        <option value="Auckland" data-image="css/auckland.jpg">Auckland</option>
-        <option value="Amman" data-image="css/amman.jpg">Amman</option>
-        <option value="San Francisco" data-image="css/sanfrancisco.jpg">
-          San Francisco
-        </option>
-      </select>
     </div>
     <footer>
       This project was coded by Louise and is
