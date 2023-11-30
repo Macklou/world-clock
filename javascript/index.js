@@ -29,21 +29,31 @@ function updateCity() {
   }
 
   let cityName = cityTimeZone.replace("_", " ").split("/")[1];
+  let cityTime = moment().tz(cityTimeZone);
   let citiesElement = document.querySelector("#cities");
 
-  citiesElement.innerHTML = `
-    <div class="city" id="${cityName}">
-        <div>
-            <h2>${cityName}</h2>
-            <div class="date"></div>
-        </div>
-        <div class="time"></div>
+  let cityInfoDiv = document.createElement("div");
+  cityInfoDiv.classList.add("city");
+  cityInfoDiv.id = cityName;
+  cityInfoDiv.innerHTML = `
+    <div>
+        <h2>${cityName}</h2>
+        <div class="date">${cityTime.format("MMMM Do YYYY")}</div>
     </div>
+    <div class="time">${cityTime.format("h:mm:ss")} <small>${cityTime.format(
+    "A"
+  )}</small></div>
   `;
 
-  updateTime(cityName, cityTimeZone);
-  changeBackground();
+  citiesElement.innerHTML = "";
+  citiesElement.appendChild(cityInfoDiv);
+
+  document.body.style.backgroundImage = cityTimeZone
+    ? "url('css/" + cityName.toLowerCase() + ".jpg')"
+    : "none";
 }
+updateTime();
+setInterval(updateTime, 1000);
 
 let citiesSelectElement = document.querySelector("#citySelector");
 citiesSelectElement.addEventListener("change", changeBackground);
