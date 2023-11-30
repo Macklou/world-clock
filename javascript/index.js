@@ -8,17 +8,15 @@ function changeBackground() {
   updateCity();
 }
 
-function updateTime() {
-  let londonElement = document.querySelector("#london");
-  if (londonElement) {
-    let londonDateElement = londonElement.querySelector(".date");
-    let londonTimeElement = londonElement.querySelector(".time");
-    let londonTime = moment().tz("Europe/London");
+function updateTime(cityId, timeZone) {
+  let cityElement = document.querySelector(`#${cityId}`);
+  if (cityElement) {
+    let dateElement = cityElement.querySelector(".date");
+    let timeElement = cityElement.querySelector(".time");
+    let cityTime = moment().tz(timeZone);
 
-    londonDateElement.innerHTML = londonTime.format("MMMM Do YYYY");
-    londonTimeElement.innerHTML = londonTime.format(
-      "h:mm:ss [<small>]A[</small>]"
-    );
+    dateElement.innerHTML = cityTime.format("MMMM Do YYYY");
+    timeElement.innerHTML = cityTime.format("h:mm:ss [<small>]A[</small>]");
   }
 }
 
