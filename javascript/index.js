@@ -23,16 +23,17 @@ function updateTime() {
   }
 }
 
-function updateCity() {
-  let citySelector = document.getElementById("citySelector");
-  let selectedCity = citySelector.options[citySelector.selectedIndex].value;
-  let cityName = selectedCity.split("/")[1];
-
-  let cityTime = moment().tz(selectedCity);
-  let citiesElement = document.getElementById("cities");
+function updateCity(event) {
+  let cityTimeZone = event.target.value;
+  if (cityTimeZone === "current") {
+    cityTimeZone = moment.tz.guess();
+  }
+  let cityName = cityTimeZone.replace("_", " ").split("/")[1];
+  let cityTime = moment().tz(cityTimeZone);
+  let citiesElement = document.querySelector("#cities");
 
   citiesElement.innerHTML = `
-    <div class="city" id="${cityName.toLowerCase()}">
+    <div class="city" id="${cityName}">
       <div>
         <h2>${cityName}</h2>
         <div class="date">${cityTime.format("MMMM Do YYYY")}</div>
@@ -43,3 +44,9 @@ function updateCity() {
     </div>
   `;
 }
+
+updateTime();
+setInterval(updateTime, 1000);
+
+let citiesSelectElement = document.querySelector("#citySelector");
+citiesSelectElement.addEventListener("change", updateCity);
