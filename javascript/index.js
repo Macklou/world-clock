@@ -29,24 +29,21 @@ function updateCity() {
   }
 
   let cityName = cityTimeZone.replace("_", " ").split("/")[1];
-  let cityTime = moment().tz(cityTimeZone);
   let citiesElement = document.querySelector("#cities");
 
   citiesElement.innerHTML = `
-        <div class="city" id="${cityName}">
-            <div>
-                <h2>${cityName}</h2>
-                <div class="date">${cityTime.format("MMMM Do YYYY")}</div>
-            </div>
-            <div class="time">${cityTime.format(
-              "h:mm:ss"
-            )} <small>${cityTime.format("A")}</small></div>
+    <div class="city" id="${cityName}">
+        <div>
+            <h2>${cityName}</h2>
+            <div class="date"></div>
         </div>
-    `;
-}
+        <div class="time"></div>
+    </div>
+  `;
 
-updateTime();
-setInterval(updateTime, 1000);
+  updateTime(cityName, cityTimeZone);
+  changeBackground();
+}
 
 let citiesSelectElement = document.querySelector("#citySelector");
 citiesSelectElement.addEventListener("change", changeBackground);
