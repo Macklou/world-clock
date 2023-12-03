@@ -15,7 +15,6 @@ function updateTime(cityId, timeZone) {
     let timeElement = cityElement.querySelector(".time");
 
     if (timeZone === "current") {
-      // For "Local Time" option, use the local time
       timeZone = moment.tz.guess();
     }
 
@@ -34,16 +33,16 @@ function updateCity() {
     cityTimeZone = moment.tz.guess();
   }
 
-  let cityName = cityTimeZone.split("/")[1]; // Directly use the second part of the split
+  let cityName = cityTimeZone.split("/")[1];
   let cityTime = moment().tz(cityTimeZone);
   let citiesElement = document.querySelector("#cities");
 
   let cityInfoDiv = document.createElement("div");
   cityInfoDiv.classList.add("city");
-  cityInfoDiv.id = cityName.replace(" ", ""); // Remove spaces for the ID
+  cityInfoDiv.id = cityName.replace(" ", "");
   cityInfoDiv.innerHTML = `
     <div>
-        <h2>${cityName}</h2>
+        <h2><a href="https://www.timeanddate.com/worldclock/">${cityName}</a></h2>
         <div class="date">${cityTime.format("MMMM Do YYYY")}</div>
     </div>
     <div class="time">${cityTime.format("h:mm:ss")} <small>${cityTime.format(
@@ -67,6 +66,6 @@ document.addEventListener("DOMContentLoaded", function () {
   updateCity();
   setInterval(updateCity, 1000);
 
-  updateTime(); // Call updateTime once initially
+  updateTime();
   setInterval(updateTime, 1000);
 });
